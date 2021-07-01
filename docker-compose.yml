@@ -1,0 +1,28 @@
+version: "3"
+services:
+  mono-db:
+    container_name: postgres-potential-crud-final
+    image: postgres:12-alpine
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=senha123
+      - POSTGRES_USER=potential-crud
+      - POSTGRES_DB=data
+    ports:
+      - 5432:5432
+  api:
+    build: .
+    environment:
+      - DB_USER=potential-crud
+      - DB_PASSWORD=senha123
+      - DB_HOST=mono-db
+      - DB_DATABASE=mono-db
+      - DB_PORT=5432
+      - DATABASE_URL=postgres://potential-crud:senha123@mono-db:5432/data
+    depends_on:
+      - mono-db
+    ports:
+      - 3030:3030
+    command: sh -c "/wait && yarn start"
+    volumes:
+      - .:/usr/src/app
