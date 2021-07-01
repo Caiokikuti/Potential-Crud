@@ -1,0 +1,10 @@
+{
+  "dev": {
+    "driver": "pg",
+    "user": "potential-crud",
+    "password": "senha123",
+    "host": "localhost",
+    "database": "data"
+  },
+  "sql-file": true
+}
