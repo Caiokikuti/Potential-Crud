@@ -13,6 +13,7 @@
 - [Pré-requisitos](#pré-requisitos)
 - [Executar](#executar)
 - [Endpoints](#endpoints)
+- [Front-end](#front-end)
 - [Tecnologias utilizadas](#tecnologias)
 - [Testes](#testes)
 - [Autor](#autor)
@@ -63,7 +64,65 @@ docker-compose down
 
 ## Endpoints
 
-<p>Caso deseje parar a execução do container, utilize:</p>
+<p>Para cadastrar um user utilize o endpoint http://localhost:3030/users, por exemplo:<p>
+
+```json
+{
+  "email": "admin@admin.com",
+  "password": "admin"
+}
+```
+
+<p>O cadastro de um usuário é necessário para que seja feita a autenticação via jwt.
+Para recuperar esse token jwt e utilizá-lo nas requisições é necessário acessar o endpoint http://localhost:3030/authentication passando as credências do usuário e a estratégia<p>
+
+```json
+{
+  "email": "admin@admin.com",
+  "password": "admin",
+  "strategy": "local"
+}
+```
+
+<p> POST: Para realizar um POST de desenvolvedor é necessário passar no header Authorization da requisição o Bearer Token. Para chamar o post basta acessar:  http://localhost:3030/developers e passar um corpo no formato abaixo:<p>  
+  
+ ```json
+{
+	"nome": "Vini",
+	"idade": 15,
+	"hobby": "Programar",
+  "sexo": "M",
+	"dataNascimento": "1943-01-17"
+}
+``` 
+<p> GET: Para realizar um GET de desenvolvedor é necessário passar no header Authorization da requisição o Bearer Token. Para chamar o GET basta acessar:  http://localhost:3030/developers. Alguns parametros para busca podem ser passados conforme mostrado abaixo:<p>
+
+- http://localhost:3030/developers/1 (Retorna usuario com o id igual a 1)
+- http://localhost:3030/developers?nome[$like]=Vini (Busca usuarios com nome contendo Vini)
+- http://localhost:3030/developers?hobby[$like]=programar (Busca usuarios com dado hobby)
+- http://localhost:3030/developers?sexo[$like]=M (Busca usuarios com dado sexo)
+- http://localhost:3030/developers?dataNascimento=1943-01-17 (Busca usuarios com dada data de nascimento)
+- Vale ressaltar que os parâmetros das buscas são combináveis.
+
+<p> PUT: Para realizar um PUT em um desenvolvedor é necessário passar no header Authorization da requisição o Bearer Token. Para chamar o PUT basta acessar:  http://localhost:3030/developers/{id do desenvolvedor}. Você pode modificar alguma informação do json abaixo<p>
+
+```json
+{
+  "nome": "Vini",
+  "idade": 15,
+  "hobby": "Programar",
+  "sexo": "M",
+  "dataNascimento": "1943-01-17"
+}
+```
+
+<p> DELETE: Para realizar um DELETE em um desenvolvedor é necessário passar no header Authorization da requisição o Bearer Token. Para chamar o DELETE basta acessar:  http://localhost:3030/developers/{id do desenvolvedor}.<p>
+
+## Front-end
+
+<p> Todos os endpoints acima podem ser chamados pelo POSTMAN ou Insominia. Caso deseje, também foi desenvolvido um Front-end simples com intuito de facilitar o teste<p>
+
+- [Front-end](https://github.com/Caiokikuti/Potential-crud-UI)
 
 ## Tecnologias
 
