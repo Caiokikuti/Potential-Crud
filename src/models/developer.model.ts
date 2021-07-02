@@ -1,11 +1,11 @@
-import { Sequelize, DataTypes, Model } from "sequelize";
-import { Application } from "../declarations";
-import { HookReturn } from "sequelize/types/lib/hooks";
+import { Sequelize, DataTypes, Model } from 'sequelize';
+import { Application } from '../declarations';
+import { HookReturn } from 'sequelize/types/lib/hooks';
 
 export default function (app: Application): typeof Model {
-  const sequelizeClient: Sequelize = app.get("sequelizeClient");
+  const sequelizeClient: Sequelize = app.get('sequelizeClient');
   const Developer = sequelizeClient.define(
-    "developers",
+    'developers',
     {
       nome: {
         type: DataTypes.STRING,
@@ -21,7 +21,7 @@ export default function (app: Application): typeof Model {
       },
       dataNascimento: {
         type: DataTypes.DATE,
-        field: "data_nascimento",
+        field: 'data_nascimento',
         allowNull: false,
       },
       hobby: {
@@ -32,19 +32,19 @@ export default function (app: Application): typeof Model {
         allowNull: false,
         defaultValue: DataTypes.NOW,
         type: DataTypes.DATE,
-        field: "created_at",
+        field: 'created_at',
       },
       updatedAt: {
         allowNull: false,
         defaultValue: DataTypes.NOW,
         type: DataTypes.DATE,
-        field: "updated_at",
+        field: 'updated_at',
       },
       deletedAt: {
         allowNull: true,
         defaultValue: DataTypes.NOW,
         type: DataTypes.DATE,
-        field: "deleted_at",
+        field: 'deleted_at',
       },
     },
     {
